@@ -1,8 +1,36 @@
 # 🏭 RAG Multimodal Demo: Equipment Maintenance Knowledge Base
 
-A multimodal RAG showcase built with **RAGFlow** and **MinIO**, demonstrating how equipment maintenance manuals with diagrams, photos, and structured text can be converted into an image-text mixed QA experience.
+This repository is a **multimodal RAG demo/showcase** built with **RAGFlow** and **MinIO**. It demonstrates how equipment maintenance manuals containing diagrams, photos, tables, and structured text can be converted into an image-text mixed QA experience.
 
-This project uses an equipment maintenance knowledge base as the demo scenario. It shows the full flow from PDF image extraction, object storage, Markdown reconstruction, RAGFlow ingestion, and final multimodal answer display.
+The demo scenario is an equipment maintenance knowledge base. The project shows the full pipeline from PDF image extraction, object storage, Markdown reconstruction, RAGFlow ingestion, retrieval, and final multimodal answer display.
+
+## 🎯 Demo Goal
+
+The goal is to show a practical multimodal RAG pattern:
+
+1. Preserve visual evidence from maintenance manuals instead of losing it during text extraction.
+2. Store extracted images as public object URLs in MinIO.
+3. Rebuild each PDF page into Markdown that combines text and image links.
+4. Upload the reconstructed documents into RAGFlow as a searchable knowledge base.
+5. Let the assistant answer maintenance questions with both text explanations and referenced images.
+
+## ✨ What This Demo Shows
+
+| Stage | What happens | Demo output |
+| --- | --- | --- |
+| PDF parsing | Extract text and embedded images from equipment manuals | Page-level text and image files |
+| Image hosting | Upload extracted images to MinIO | Stable public image URLs |
+| Markdown reconstruction | Insert image URLs back into the related page content | Image-text mixed Markdown |
+| RAG ingestion | Create a RAGFlow dataset and assistant | Searchable multimodal knowledge base |
+| QA display | Retrieve relevant pages and render Markdown image links | Answers with diagrams/photos when needed |
+
+## 🧰 Tech Stack
+
+- **RAGFlow**: Knowledge base, retrieval, and assistant orchestration.
+- **MinIO**: Object storage for extracted manual images.
+- **PyMuPDF**: PDF text and image extraction.
+- **Markdown**: Lightweight format for preserving image-text context.
+- **FastAPI / MCP**: Optional chat and tool server interfaces.
 
 ## 📖 Project Background
 
@@ -116,14 +144,40 @@ Ensure the following services are running:
    ```bash
    pip install -r requirements.txt
    ```
-3. Configure environment variables in `.env`:
-   - `RAGFLOW_API_KEY`, `MINIO_ENDPOINT`, etc.
+3. Create a local environment file:
+   ```bash
+   cp .env.example .env
+   ```
+4. Configure the required values in `.env`:
+   - `RAGFLOW_API_KEY`
+   - `RAGFLOW_BASE_URL`
+   - `MINIO_ENDPOINT`
+   - `MINIO_ACCESS_KEY`
+   - `MINIO_SECRET_KEY`
 
 ### Step 3: Run the Processor
-Use the provided sample or your own PDF:
+Use the provided sample PDF:
 ```bash
-python ragflow_pdf_processor.py excavator_repair_case.pdf
+python src/ragflow_pdf_processor.py data/pdf/excavator_repair_case_en.pdf
 ```
+
+Or process images and Markdown only without creating RAGFlow resources:
+```bash
+python src/ragflow_pdf_processor.py data/pdf/excavator_repair_case_en.pdf --skip_ragflow
+```
+
+---
+
+## 🖥️ Expected Demo Result
+
+After running the pipeline, the project produces:
+
+- Extracted images from the maintenance PDF.
+- Page-level Markdown files with related image links.
+- A RAGFlow knowledge base for equipment maintenance.
+- A chat assistant that can answer repair questions and include relevant diagrams or photos in the response.
+
+This makes the repository suitable as a **multimodal RAG design demo**, not only a backend ingestion script.
 
 ---
 
