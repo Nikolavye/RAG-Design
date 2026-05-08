@@ -77,7 +77,7 @@ graph TD
         
         subgraph "3. Reconstruction"
             Merger["🔄 Text Enhancement\n(Insert URLs into Markdown)"]:::process
-            EnhancedDoc["📑 Enhanced Markdown\n(Mixed Text & Image URLs)")]:::file
+            EnhancedDoc["📑 Enhanced Markdown\n(Mixed Text & Image URLs)"]:::file
         end
 
         subgraph "4. Ingestion"
