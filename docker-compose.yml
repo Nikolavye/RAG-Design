@@ -1,0 +1,15 @@
+services:
+  rag-processor:
+    build: .
+    volumes:
+      - .:/app
+    environment:
+      - RAGFLOW_API_KEY=${RAGFLOW_API_KEY}
+      - RAGFLOW_BASE_URL=${RAGFLOW_DOCKER_BASE_URL:-http://host.docker.internal:8080}
+      - MINIO_ENDPOINT=${MINIO_DOCKER_ENDPOINT:-http://host.docker.internal:9090}
+      - MINIO_ACCESS_KEY=${MINIO_ACCESS_KEY}
+      - MINIO_SECRET_KEY=${MINIO_SECRET_KEY}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    # Note: If running on Mac/Windows, host.docker.internal is automatically provided.
+    # On Linux, 'host-gateway' tells Docker to point to the host bridge IP.

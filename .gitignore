@@ -1,0 +1,28 @@
+.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Local environments and secrets
+venv/
+.venv/
+env/
+.env
+.env.*
+!.env.example
+
+# Runtime output
+artifacts/
+data/logs/
+data/images/
+data/pages/
+data/mem0_*/
+*.db
+*.sqlite
+*.sqlite3
+
