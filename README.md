@@ -1,6 +1,8 @@
-# 🏭 RAGFlow Equipment Maintenance Multimodal Knowledge Base (MinIO Integrated)
+# 🏭 RAG Multimodal Demo: Equipment Maintenance Knowledge Base
 
-A multimodal knowledge base solution based on **MinIO** object storage and **RAGFlow**, specifically designed for handling equipment maintenance manuals and operation guides containing large amounts of images.
+A multimodal RAG showcase built with **RAGFlow** and **MinIO**, demonstrating how equipment maintenance manuals with diagrams, photos, and structured text can be converted into an image-text mixed QA experience.
+
+This project uses an equipment maintenance knowledge base as the demo scenario. It shows the full flow from PDF image extraction, object storage, Markdown reconstruction, RAGFlow ingestion, and final multimodal answer display.
 
 ## 📖 Project Background
 
